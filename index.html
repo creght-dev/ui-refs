@@ -318,7 +318,6 @@ function open(i) {
   $("pages").innerHTML = parts.map((p, j) => `
     ${j > 0 || parts.length > 1 ? `<div class="cut"><b>${String(j + 1).padStart(2, "0")}</b>${esc((p.sections || []).join(" · "))}</div>` : ""}
     <div class="part" id="part-${j}"><img src="${esc(p.image)}" width="${p.width}" height="${p.height}" alt="${esc(r.source)} 第 ${j + 1} 段" ${j > 1 ? 'loading="lazy"' : ""}></div>`).join("")
-  $("pages").scrollTop = 0
 
   // 板块骨架：每一项记住它在第几段，点了跳过去
   const skeleton = []
@@ -339,6 +338,9 @@ function open(i) {
     <div class="nav"><button data-step="-1">← 上一个</button><button data-step="1">下一个 →</button></div>
     <div class="hint">id ${esc(r.id)} · ← → 切换 · Esc 关闭</div>`
   $("detail").hidden = false
+  // 显示之后再回顶：隐藏（display: none）时设 scrollTop 不生效，会沿用上一个弹窗滚到的位置
+  $("pages").scrollTop = 0
+  $("side").scrollTop = 0
   document.body.style.overflow = "hidden"
   history.replaceState(null, "", `#${r.id}`)
 }
