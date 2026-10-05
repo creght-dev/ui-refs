@@ -13,10 +13,10 @@ Clone the repo, or fetch single files:
 
 - `data/refs.json` — every reviewed reference, one per line
 - `data/vocab.json` — the tag vocabulary (`industry`, `siteType`, `pageType`, `style`, `features`)
-- `images/<id>.jpg` — the image, 1200px wide
+- `images/<source>-<page type>-<id tail>.jpg` — the image, 1200px wide (path in each entry's `image`)
 
 ```json
-{"id":"p96ncw0i93rm","image":"images/p96ncw0i93rm.jpg","width":1200,"height":750,
+{"id":"p96ncw0i93rm","image":"images/gubi-com-kv-0i93rm.jpg","width":1200,"height":750,
  "kind":"screenshot","source":"gubi.com","pageUrl":"https://gubi.com",
  "industry":["家居 / 家具 / 生活方式"],"siteType":"商城","pageType":"KV 主视觉",
  "style":["奢华","摄影主导"],"features":["大图首屏"],"colors":["#8a1020","#c8a878"],
