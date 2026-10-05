@@ -142,7 +142,7 @@ main { padding: 24px 0 64px; }
   margin: 16px; flex: 1; display: flex; overflow: hidden;
   background: var(--surface); border-radius: 14px; box-shadow: var(--shadow);
 }
-.pages { flex: 1; overflow-y: auto; background: var(--chip); }
+.pages { flex: 1; overflow-y: auto; background: var(--chip); position: relative; }
 .pages .part { max-width: 1200px; margin: 0 auto; }
 .pages img { width: 100%; height: auto; display: block; }
 .cut {
@@ -316,8 +316,8 @@ function open(i) {
   const r = shown[i]
   const parts = partsOf(r)
   $("pages").innerHTML = parts.map((p, j) => `
-    ${j > 0 || parts.length > 1 ? `<div class="cut" id="part-${j}"><b>${String(j + 1).padStart(2, "0")}</b>${esc((p.sections || []).join(" · "))}</div>` : ""}
-    <div class="part"><img src="${esc(p.image)}" width="${p.width}" height="${p.height}" alt="${esc(r.source)} 第 ${j + 1} 段" ${j > 1 ? 'loading="lazy"' : ""}></div>`).join("")
+    ${j > 0 || parts.length > 1 ? `<div class="cut"><b>${String(j + 1).padStart(2, "0")}</b>${esc((p.sections || []).join(" · "))}</div>` : ""}
+    <div class="part" id="part-${j}"><img src="${esc(p.image)}" width="${p.width}" height="${p.height}" alt="${esc(r.source)} 第 ${j + 1} 段" ${j > 1 ? 'loading="lazy"' : ""}></div>`).join("")
   $("pages").scrollTop = 0
 
   // 板块骨架：每一项记住它在第几段，点了跳过去
@@ -364,9 +364,12 @@ $("grid").addEventListener("click", (e) => {
 $("side").addEventListener("click", (e) => {
   const li = e.target.closest("li[data-part]")
   if (li) {
+    // 段标题条是 sticky 的，吸住时 offsetTop 是它吸住的位置；以图片容器为准，再让出标题条的高度
     const j = Number(li.dataset.part)
-    const target = j === 0 ? null : $(`part-${j}`)
-    $("pages").scrollTo({ top: target ? target.offsetTop : 0, behavior: "smooth" })
+    const part = $(`part-${j}`)
+    const cut = part.previousElementSibling
+    const top = j === 0 ? 0 : part.offsetTop - (cut && cut.classList.contains("cut") ? cut.offsetHeight : 0)
+    $("pages").scrollTo({ top, behavior: "smooth" })
   }
   const step = e.target.closest("button[data-step]")
   if (step) open(current + Number(step.dataset.step))
