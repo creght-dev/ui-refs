@@ -19,21 +19,29 @@ npx creght-cli refs search --industry="家居 / 家具 / 生活方式" --site_ty
 `--save` downloads the matching images (1200px wide) so agents that read local
 files can open them. Results are shuffled and spread across styles.
 
-Or read the files directly:
+Or read the files directly — clone the repo, or fetch single files:
 
 - `data/refs.json` — every reviewed reference, one per line
 - `data/vocab.json` — the tag vocabulary (`industry`, `siteType`, `pageType`, `style`, `features`)
+- `images/<id>.jpg` — the image, 1200px wide
 
 ```json
-{"id":"p96ncw0i93rm","url":"https://fsu.creght.com/...jpg","width":1440,"height":900,
+{"id":"p96ncw0i93rm","image":"images/p96ncw0i93rm.jpg","width":1200,"height":750,
  "kind":"screenshot","source":"gubi.com","pageUrl":"https://gubi.com",
  "industry":["家居 / 家具 / 生活方式"],"siteType":"商城","pageType":"KV 主视觉",
  "style":["奢华","摄影主导"],"features":["大图首屏"],"colors":["#8a1020","#c8a878"],
  "summary":"整屏酒红丝绒沙发特写……"}
 ```
 
-Images are served from Creght's CDN, not stored in this repository. Append
-`?w=<width>` to an image URL for a resized copy.
+`refs.json` is about 200 KB — filter it instead of reading it whole, and pick
+from several styles rather than the first matches:
+
+```bash
+curl -s https://raw.githubusercontent.com/creght-dev/ui-refs/main/data/refs.json \
+  | jq -c '.[] | select(.industry | index("家居 / 家具 / 生活方式")) | select(.siteType == "商城")
+               | {image, source, pageType, style, summary}'
+# image: https://raw.githubusercontent.com/creght-dev/ui-refs/main/<image>
+```
 
 ## License
 
