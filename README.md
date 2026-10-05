@@ -35,7 +35,6 @@ curl -s https://raw.githubusercontent.com/creght-dev/ui-refs/main/data/refs.json
 
 ## License
 
-- Code (`scripts/`, workflows): MIT.
 - Tags and summaries in `data/`: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 - **Images are not covered by either license.** Each one is a screenshot or
   copy of someone else's work — copyright stays with its owner, named in
