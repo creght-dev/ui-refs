@@ -5,21 +5,11 @@ and product scene images, tagged by industry, site type, page type and style —
 for AI agents (and people) to look at before deciding a new site's look.
 
 由 [Creght](https://creght.cn) 团队采集、AI 打标、人工审核的 UI 参考库。这里是发布出口：
-数据每天从审核平台自动导出，请不要直接改 `data/`。
+数据由审核平台导出，请不要直接改 `data/` 和 `images/`。
 
 ## Use it
 
-With the [Creght CLI](https://github.com/creght-dev/creght-cli) (no login needed):
-
-```bash
-npx creght-cli refs vocab
-npx creght-cli refs search --industry="家居 / 家具 / 生活方式" --site_type=商城 --save=./refs
-```
-
-`--save` downloads the matching images (1200px wide) so agents that read local
-files can open them. Results are shuffled and spread across styles.
-
-Or read the files directly — clone the repo, or fetch single files:
+Clone the repo, or fetch single files:
 
 - `data/refs.json` — every reviewed reference, one per line
 - `data/vocab.json` — the tag vocabulary (`industry`, `siteType`, `pageType`, `style`, `features`)

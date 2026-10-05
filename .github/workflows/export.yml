@@ -1,8 +1,7 @@
 name: Export references
 
+# Run by hand (Actions → Export references → Run workflow) after a review batch.
 on:
-  schedule:
-    - cron: '0 20 * * *' # daily, 04:00 Beijing time
   workflow_dispatch:
 
 permissions:
