@@ -47,6 +47,30 @@ curl -s https://raw.githubusercontent.com/creght-dev/ui-refs/main/data/refs.json
 # image: https://raw.githubusercontent.com/creght-dev/ui-refs/main/<image>
 ```
 
+## For agents
+
+Paste this into your agent's instructions (system prompt, `AGENTS.md`, a skill) when it is about
+to design a site, a page, an EDM or a KV:
+
+````markdown
+Before deciding the look, check UI Refs (https://github.com/creght-dev/ui-refs) for real designs to borrow from.
+Base URL for every file below: https://raw.githubusercontent.com/creght-dev/ui-refs/main/
+
+1. Fetch `data/vocab.json` and map the brief to its words: one `industry`, one `siteType`, one `pageType`.
+   Tags are in Chinese; use the exact strings from the vocabulary.
+2. Filter `data/refs.json` (about 300 KB — never read it whole) and read only tags and summaries:
+   curl -s <base>data/refs.json | jq -c '.[] | select(.industry | index("<industry>"))
+     | select(.siteType == "<siteType>") | {id, source, pageType, style, sections, summary}'
+   Too few hits: drop `siteType` first, then widen `industry`. Too many: add `pageType`.
+3. Pick 2–3 that differ in `style`, not the first matches.
+4. Look at the images: `image` is the first screen, 1200px wide. To see the rest of a page,
+   open the entries of `parts` whose `sections` cover the blocks you need, not all of them.
+   EDMs (`kind: "image"`) can be up to 4000px tall; crop them to about 2600px tall before viewing,
+   or the text gets too small to read.
+5. Take the direction — layout, rhythm, type scale, colour (`colors`), how blocks are composed.
+   Never copy their text, logos or photos.
+````
+
 ## License
 
 - Tags and summaries in `data/`: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
