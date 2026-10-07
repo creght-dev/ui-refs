@@ -1,6 +1,6 @@
 ---
 name: ui-refs
-description: Real-website design references to borrow from before deciding a look. Use when designing or restyling a website, landing page, EDM (marketing email), Amazon A+ module or KV (key visual), or when choosing a visual direction for one.
+description: Real-website design references to borrow from before deciding a look. Use when designing or restyling a website, landing page or KV (key visual), or when choosing a visual direction for one.
 ---
 
 # UI Refs
@@ -38,8 +38,6 @@ Every path below is relative to `https://raw.githubusercontent.com/creght-dev/ui
    - `image` is the first section, 1200px wide.
    - To see further down a page, open the `parts` entries whose `sections` hold the blocks you
      need — pricing, footer, product grid — and leave the rest.
-   - EDMs (`kind: "image"`) run up to 4000px tall. Cut them into slices about 2600px tall
-     before viewing, so the text stays readable.
 
 5. **Take the direction.** Write down what you are borrowing from each pick — layout, rhythm,
    type scale, colours (`colors`), how blocks are composed — then design. Write your own text
@@ -51,4 +49,4 @@ Every path below is relative to `https://raw.githubusercontent.com/creght-dev/ui
 `id`, `image`, `width`, `height`, `kind` (`screenshot` | `image`), `platform`, `source`, `pageUrl`, `pageTitle`,
 `industry[]`, `siteType`, `pageType`, `style[]`, `features[]`, `colors[]`, `summary`,
 `sections[]` (page skeleton, top to bottom), `parts[]` (`{image, width, height, sections}`;
-`parts[0]` is `image`). Single images — EDMs, A+ modules, KVs — have no `sections` or `parts`.
+`parts[0]` is `image`). Single images such as KVs have no `sections` or `parts`.

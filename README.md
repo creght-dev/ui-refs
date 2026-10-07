@@ -1,6 +1,6 @@
 # UI Refs
 
-A curated library of well-designed real websites, EDMs, Amazon A+ modules and KVs,
+A curated library of well-designed real websites and KVs,
 tagged by industry, site type, page type and style — for AI agents (and people)
 to look at before deciding a new site's look. Full-page screenshots are cut into
 sections at their block boundaries, and every section is named, so you can see
@@ -22,7 +22,7 @@ Clone the repo, or fetch single files:
 - `thumbs/` — 480px thumbnails of the first section, for the gallery
 
 `sections` is the page skeleton, top to bottom; `parts` lists every section image with the
-blocks it shows (`parts[0]` is `image`). Single images such as EDMs, A+ modules and KVs have neither.
+blocks it shows (`parts[0]` is `image`). Single images such as KVs have neither.
 
 ```json
 {"id":"p96ncw0i93rm","image":"images/gubi-com-kv-0i93rm.jpg","width":1200,"height":750,
@@ -53,13 +53,14 @@ curl -s https://raw.githubusercontent.com/creght-dev/ui-refs/main/data/refs.json
 map the brief to the vocabulary, shortlist by tags and summaries, pick 2–3 in different styles,
 look at the right sections, and borrow the direction.
 
-Install it as a Claude Code skill:
+Install it with [`skills`](https://github.com/vercel-labs/skills) — it fetches this one file,
+not the whole repository, and asks which agents (Claude Code, Cursor, Codex …) to install to:
 
 ```bash
-mkdir -p ~/.claude/skills/ui-refs
-curl -so ~/.claude/skills/ui-refs/SKILL.md \
-  https://raw.githubusercontent.com/creght-dev/ui-refs/main/skills/ui-refs/SKILL.md
+npx skills add https://raw.githubusercontent.com/creght-dev/ui-refs/main/skills/ui-refs/SKILL.md
 ```
+
+Or ask your agent to run it for you (add `-g -y` to install globally without prompts).
 
 For other agents, paste the body of `SKILL.md` into their instructions (system prompt, `AGENTS.md`).
 

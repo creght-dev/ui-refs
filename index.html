@@ -402,7 +402,7 @@ $("toggle").addEventListener("click", () => {
 
 Promise.all([fetch("data/refs.json").then((r) => r.json()), fetch("data/vocab.json").then((r) => r.json())])
   .then(([list, v]) => {
-    // 网页截图在前，按更新时间倒序；EDM、A+ 这类单张物料放后面
+    // 网页截图在前，按更新时间倒序；KV、A+ 这类单张物料放后面
     const asset = (r) => (r.kind === "image" || !r.parts ? 1 : 0)
     refs = list.sort((a, b) => asset(a) - asset(b) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")))
     vocab = v
